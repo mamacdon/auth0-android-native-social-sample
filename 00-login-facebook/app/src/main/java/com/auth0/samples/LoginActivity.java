@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
     private static final String FACEBOOK_SUBJECT_TOKEN_TYPE = "http://auth0.com/oauth/token-type/facebook-info-session-access-token";
     private static final List<String> FACEBOOK_PERMISSIONS = Arrays.asList("public_profile", "email");
-    private static final String AUTH0_SCOPE = "openid email profile offline_access";
+    private static final String AUTH0_SCOPE = "openid email profile";
 
 
     private CallbackManager fbCallbackManager;
@@ -58,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult result) {
                 //1. Logged in to Facebook
                 AccessToken accessToken = result.getAccessToken();
+                Log.i(TAG, "Facebook token is " + accessToken.toString());
                 performLogin(accessToken);
             }
 
@@ -101,6 +102,8 @@ public class LoginActivity extends AppCompatActivity {
                                  *  Use access token to call API
                                  *  or consume ID token locally
                                  */
+                                Log.i(TAG, "Auth0 access token: " + credentials.getAccessToken());
+                                Log.i(TAG, "Auth0 id token: " + credentials.getIdToken());
                             }
 
                             @Override
